@@ -48,6 +48,42 @@ class TicTacToe:
                 self.state = "playerXturn"
 
             self.button_grid[row][column].config(text=btn_text)
+            print(self.check_winner())
+    
+    def check_which_player(self, player):
+        # Horizontal checks
+        if self.button_grid[0][0].cget('text') == player and self.button_grid[0][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
+            return player
+        elif self.button_grid[1][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[1][2].cget('text') == player:
+            return player
+        elif self.button_grid[2][0].cget('text') == player and self.button_grid[2][1].cget('text') == player and self.button_grid[2][2].cget('text') == player:
+            return player
+        
+        # Vertical checks
+        elif self.button_grid[0][0].cget('text') == player and self.button_grid[1][0].cget('text') == player and self.button_grid[2][0].cget('text') == player:
+            return player
+        elif self.button_grid[0][1].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[2][1].cget('text') == player:
+            return player
+        elif self.button_grid[0][2].cget('text') == player and self.button_grid[1][2].cget('text') == player and self.button_grid[2][2].cget('text') == player:
+            return player
+        
+        # Diagonal checks
+        elif self.button_grid[0][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[2][2].cget('text') == player:
+            return player
+        elif self.button_grid[2][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
+            return player
+        
+        else:
+            return None
+
+    def check_winner(self):
+        if self.check_which_player("X") is not None:
+            return self.check_which_player("X")
+        elif self.check_which_player("O") is not None:
+            return self.check_which_player("O")
+        
+        return None
+        
 
 root = Tk()
 TicTacToe(root)
