@@ -9,7 +9,7 @@ class TicTacToe:
 
     def create_ui(self):
         # Set up main application window
-        root.title('Tic-Tac-Toe')
+        self.root.title('Tic-Tac-Toe')
 
         # Create a content frame
         mainframe = ttk.Frame(self.root, padding=(3, 3, 12, 12))
@@ -67,6 +67,27 @@ class TicTacToe:
                     
     
     def check_this_player(self, player):
+        win_conditions = [
+            # Horizontal
+            [(0, 0), (0, 1), (0, 2)],
+            [(1, 0), (1, 1), (1, 2)],
+            [(2, 0), (2, 1), (2, 2)],
+            # Vertical
+            [(0, 0), (1, 0), (2, 0)],
+            [(0, 1), (1, 1), (2, 1)],
+            [(0, 2), (1, 2), (2, 2)],
+            # Diagonal
+            [(0, 0), (1, 1), (2, 2)],
+            [(2, 0), (1, 1), (0, 2)]
+        ]
+        
+        for win_condition in win_conditions:
+            if all(self.button_grid[r][c].cget('text') == player for r, c in win_condition):
+                    return player
+     
+        return None
+
+        '''
         # Horizontal checks
         if self.button_grid[0][0].cget('text') == player and self.button_grid[0][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
             return player
@@ -91,6 +112,7 @@ class TicTacToe:
 
         else:
             return None
+        '''
 
     def is_board_filled(self):
         for r in range(3):
