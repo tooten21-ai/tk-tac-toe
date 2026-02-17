@@ -30,6 +30,7 @@ class TicTacToe:
     
     def make_move(self, row, column):
         print(f"Pressed button[{row}][{column}]")
+        self.button_grid[row][column].config(text="X")
 
 
 root = Tk()
