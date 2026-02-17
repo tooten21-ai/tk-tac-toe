@@ -3,15 +3,16 @@ from tkinter import ttk, messagebox
 
 class TicTacToe:
     def __init__(self, root):
-        self.create_ui(root)
+        self.root = root
+        self.create_ui()
         self.new_game()
 
-    def create_ui(self, root):
+    def create_ui(self):
         # Set up main application window
         root.title('Tic-Tac-Toe')
 
         # Create a content frame
-        mainframe = ttk.Frame(root, padding=(3, 3, 12, 12))
+        mainframe = ttk.Frame(self.root, padding=(3, 3, 12, 12))
 
         # Insert the frame into the user interface
         mainframe.grid(column=0, row=0)
@@ -57,12 +58,12 @@ class TicTacToe:
                         if messagebox.askyesno(message=f'The winner is {result}! Play again?', icon='question', title='Game over'):
                             self.new_game()
                         else: 
-                            root.destroy()
+                            self.root.destroy()
                     else:
                         if messagebox.askyesno(message=f'Draw! Play again?', icon='question', title='Game over'):
                             self.new_game()
                         else:
-                            root.destroy()
+                            self.root.destroy()
                     
     
     def check_this_player(self, player):
