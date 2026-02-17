@@ -13,23 +13,23 @@ class TicTacToe:
         mainframe.grid(column=0, row=0)
 
         # Create button grid
-        button_grid = [
+        self.button_grid = [
             [],
             [],
             []
         ]
         for r in range(3):
             for c in range(3):
-                button = ttk.Button(mainframe, width=5)
+                button = ttk.Button(mainframe, command=lambda r=r, c=c: self.make_move(r, c), width=5)
                 button.grid(row=r, column=c)
-                button_grid[r].append(button)
-
+                self.button_grid[r].append(button)
+        
         # Add polish
         for child in mainframe.winfo_children(): 
             child.grid_configure(padx=10, pady=10)
     
-    def make_move(self):
-        pass
+    def make_move(self, row, column):
+        print(f"Pressed button[{row}][{column}]")
 
 
 root = Tk()
