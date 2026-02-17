@@ -1,5 +1,5 @@
 from tkinter import *
-from tkinter import ttk
+from tkinter import ttk, messagebox
 
 class TicTacToe:
     def __init__(self, root):
@@ -8,7 +8,7 @@ class TicTacToe:
 
     def create_ui(self, root):
         # Set up main application window
-        root.title("Tic-Tac-Toe")
+        root.title('Tic-Tac-Toe')
 
         # Create a content frame
         mainframe = ttk.Frame(root, padding=(3, 3, 12, 12))
@@ -33,25 +33,33 @@ class TicTacToe:
             child.grid_configure(padx=10, pady=10)
 
     def new_game(self):
-        self.state = "playerXturn"
+        self.state = 'playerXturn'
         for r in range(3):
             for c in range(3):
-                self.button_grid[r][c].config(text="")
+                self.button_grid[r][c].config(text='')
 
     def make_move(self, row, column):
-        if self.state == "playerXturn" or self.state == "playerOturn":
-            if self.button_grid[row][column].cget('text') == "":
-                if self.state == "playerXturn":
-                    btn_text = "X"
-                    self.state = "playerOturn"
+        if self.state == 'playerXturn' or self.state == 'playerOturn':
+            if self.button_grid[row][column].cget('text') == '':
+                if self.state == 'playerXturn':
+                    btn_text = 'X'
+                    self.state = 'playerOturn'
                 else:
-                    btn_text = "O"
-                    self.state = "playerXturn"
+                    btn_text = 'O'
+                    self.state = 'playerXturn'
 
                 self.button_grid[row][column].config(text=btn_text)
                 
                 if self.check_winner() is not None:
-                    self.state = "game_over"
+                    self.state = 'game_over'
+                    result = self.check_winner() 
+                    if result == 'X' or result == 'O':
+                        messagebox.askyesno(message=f'The winner is {result}! Play again?', icon='question', title='Game over')
+                    else:
+                        messagebox.askyesno(message=f'Draw! Play again?', icon='question', title='Game over')
+                    
+                    
+                    
     
     def check_this_player(self, player):
         # Horizontal checks
@@ -82,18 +90,18 @@ class TicTacToe:
     def is_board_filled(self):
         for r in range(3):
             for c in range(3):
-                if self.button_grid[r][c].cget('text') == "":
+                if self.button_grid[r][c].cget('text') == '':
                     return False
         
         return True
 
     def check_winner(self):
-        if self.check_this_player("X") is not None:
-            return self.check_this_player("X")
-        elif self.check_this_player("O") is not None:
-            return self.check_this_player("O")
+        if self.check_this_player('X') is not None:
+            return self.check_this_player('X')
+        elif self.check_this_player('O') is not None:
+            return self.check_this_player('O')
         elif self.is_board_filled():
-            return "draw"
+            return 'draw'
         else:
             return None
         
