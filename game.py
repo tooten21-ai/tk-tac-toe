@@ -3,6 +3,10 @@ from tkinter import ttk
 
 class TicTacToe:
     def __init__(self, root):
+        self.create_ui(root)
+        self.new_game()
+
+    def create_ui(self, root):
         # Set up main application window
         root.title("Tic-Tac-Toe")
 
@@ -27,8 +31,6 @@ class TicTacToe:
         # Add polish
         for child in mainframe.winfo_children(): 
             child.grid_configure(padx=10, pady=10)
-    
-        self.new_game()
 
     def new_game(self):
         self.state = "playerXturn"
