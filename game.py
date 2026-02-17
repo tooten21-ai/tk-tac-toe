@@ -39,18 +39,21 @@ class TicTacToe:
                 self.button_grid[r][c].config(text="")
 
     def make_move(self, row, column):
-        if self.button_grid[row][column].cget('text') == "":
-            if self.state == "playerXturn":
-                btn_text = "X"
-                self.state = "playerOturn"
-            else:
-                btn_text = "O"
-                self.state = "playerXturn"
+        if self.state == "playerXturn" or self.state == "playerOturn":
+            if self.button_grid[row][column].cget('text') == "":
+                if self.state == "playerXturn":
+                    btn_text = "X"
+                    self.state = "playerOturn"
+                else:
+                    btn_text = "O"
+                    self.state = "playerXturn"
 
-            self.button_grid[row][column].config(text=btn_text)
-            print(self.check_winner())
+                self.button_grid[row][column].config(text=btn_text)
+                
+                if self.check_winner() is not None:
+                    self.state = "game_over"
     
-    def check_which_player(self, player):
+    def check_this_player(self, player):
         # Horizontal checks
         if self.button_grid[0][0].cget('text') == player and self.button_grid[0][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
             return player
@@ -72,17 +75,27 @@ class TicTacToe:
             return player
         elif self.button_grid[2][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
             return player
-        
+
         else:
             return None
 
-    def check_winner(self):
-        if self.check_which_player("X") is not None:
-            return self.check_which_player("X")
-        elif self.check_which_player("O") is not None:
-            return self.check_which_player("O")
+    def is_board_filled(self):
+        for r in range(3):
+            for c in range(3):
+                if self.button_grid[r][c].cget('text') == "":
+                    return False
         
-        return None
+        return True
+
+    def check_winner(self):
+        if self.check_this_player("X") is not None:
+            return self.check_this_player("X")
+        elif self.check_this_player("O") is not None:
+            return self.check_this_player("O")
+        elif self.is_board_filled():
+            return "draw"
+        else:
+            return None
         
 
 root = Tk()
