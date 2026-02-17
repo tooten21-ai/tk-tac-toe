@@ -54,11 +54,15 @@ class TicTacToe:
                     self.state = 'game_over'
                     result = self.check_winner() 
                     if result == 'X' or result == 'O':
-                        messagebox.askyesno(message=f'The winner is {result}! Play again?', icon='question', title='Game over')
+                        if messagebox.askyesno(message=f'The winner is {result}! Play again?', icon='question', title='Game over'):
+                            self.new_game()
+                        else: 
+                            root.destroy()
                     else:
-                        messagebox.askyesno(message=f'Draw! Play again?', icon='question', title='Game over')
-                    
-                    
+                        if messagebox.askyesno(message=f'Draw! Play again?', icon='question', title='Game over'):
+                            self.new_game()
+                        else:
+                            root.destroy()
                     
     
     def check_this_player(self, player):
