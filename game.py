@@ -28,9 +28,33 @@ class TicTacToe:
         for child in mainframe.winfo_children(): 
             child.grid_configure(padx=10, pady=10)
     
+        self.new_game()
+        
+    
+    def new_game(self):
+        self.state = "playerXturn"
+        for r in range(3):
+            for c in range(3):
+                self.button_grid[r][c].config(text="")
+
+
     def make_move(self, row, column):
-        print(f"Pressed button[{row}][{column}]")
-        self.button_grid[row][column].config(text="X")
+        if self.button_grid[row][column].cget('text') == "":
+            if self.state == "playerXturn":
+                btn_text = "X"
+                self.state = "playerOturn"
+            else:
+                btn_text = "O"
+                self.state = "playerXturn"
+
+            self.button_grid[row][column].config(text=btn_text)
+
+        
+
+        
+        
+
+        
 
 
 root = Tk()
