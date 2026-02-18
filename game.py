@@ -87,33 +87,6 @@ class TicTacToe:
      
         return None
 
-        '''
-        # Horizontal checks
-        if self.button_grid[0][0].cget('text') == player and self.button_grid[0][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
-            return player
-        elif self.button_grid[1][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[1][2].cget('text') == player:
-            return player
-        elif self.button_grid[2][0].cget('text') == player and self.button_grid[2][1].cget('text') == player and self.button_grid[2][2].cget('text') == player:
-            return player
-        
-        # Vertical checks
-        elif self.button_grid[0][0].cget('text') == player and self.button_grid[1][0].cget('text') == player and self.button_grid[2][0].cget('text') == player:
-            return player
-        elif self.button_grid[0][1].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[2][1].cget('text') == player:
-            return player
-        elif self.button_grid[0][2].cget('text') == player and self.button_grid[1][2].cget('text') == player and self.button_grid[2][2].cget('text') == player:
-            return player
-        
-        # Diagonal checks
-        elif self.button_grid[0][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[2][2].cget('text') == player:
-            return player
-        elif self.button_grid[2][0].cget('text') == player and self.button_grid[1][1].cget('text') == player and self.button_grid[0][2].cget('text') == player:
-            return player
-
-        else:
-            return None
-        '''
-
     def is_board_filled(self):
         for r in range(3):
             for c in range(3):
